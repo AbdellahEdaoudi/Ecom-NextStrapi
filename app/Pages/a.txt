@@ -1,0 +1,128 @@
+edecomapp\app\Pages\productSection.jsx(
+    'use client'
+import React, { useEffect, useState } from 'react'
+import ProductList from './ProductList'
+import ProductApi from '../Api/ProductApi'
+
+
+function Product() {
+  const [ProductList,setproductList]=useState([])
+  useEffect(()=>{
+    getProducts();
+  },[])
+  const getProducts=()=>{
+    ProductApi.getProducte().then(res=>{
+      console.log(res.data.data);
+      setproductList(res.data.data)
+    })
+  }
+  return (
+    <div className='px-7'>
+      <h1 className='text-[20px] py-3 font-medium'>Oue Latest products</h1>
+      <ProductList  ProductList={ProductList}/>
+    </div>
+  )
+}
+
+export default Product
+)
+C:\Users\PC\Desktop\PrgWebNext\edecomapp\app\Pages\ProductList.jsx(
+    import React from 'react';
+import ProductItem from './ProductItem';
+
+function ProductList({ ProductList }) {
+
+  return (
+    <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2'>
+      {ProductList.map((lst, i) => (
+        <div key={i}><ProductItem product={lst} /></div>
+      ))}
+    </div>
+  );
+}
+
+export default ProductList;
+)
+C:\Users\PC\Desktop\PrgWebNext\edecomapp\app\Pages\ProductItem.jsx(
+    import React from 'react';
+import ProductItem from './ProductItem';
+
+function ProductList({ ProductList }) {
+
+  return (
+    <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2'>
+      {ProductList.map((lst, i) => (
+        <div key={i}><ProductItem product={lst} /></div>
+      ))}
+    </div>
+  );
+}
+
+export default ProductList;
+
+)
+C:\Users\PC\Desktop\PrgWebNext\edecomapp\app\Product-details\[productId]\page.js(
+    'use client'
+import ProductApi from '@/app/Api/ProductApi'
+import BreadCrupm from '@/app/Pages/BreadCrupm';
+import React, { useEffect, useState } from 'react'
+import Productbnr from './component/productbnr';
+import ProductInfo from './component/ProductInfo';
+import ProductList from '@/app/Pages/ProductList';
+
+function ProductDatails({params}) {
+  const [productDtls,setProductDtls]=useState({})
+  const [productList,setproductList]=useState({})
+
+  useEffect(()=>{
+    getProbyid();
+  },[params?.productId])  
+
+  const getProbyid=()=>{
+    ProductApi.getProductebyId(params?.productId).then((res)=>{
+      console.log("product  item",res.data.data);
+      setProductDtls(res.data.data)
+      getbyfiltCateg(res.data.data)
+    })
+
+  }
+  const getbyfiltCateg =(product)=>{
+    ProductApi.getbyfiltCateg(product?.attributes.categorie).then((res)=>{
+      console.log(res?.data?.data)
+      setproductList(res?.data?.data)
+    })
+  }
+  return (
+    <div className='px-10 md:px-28 py-8'>
+      <BreadCrupm />
+      <div className='mt-10  justify-around grid grid-cols-1 md:grid-cols-2 gap-4'>
+        <Productbnr product={productDtls} />
+        <ProductInfo product={productDtls} />
+      </div>
+      <div>
+        <div>
+          <h1 className='mt-10 text-xl'>Similar Products</h1>
+          <ProductList productList={productList} />
+        </div>
+      </div>
+    </div>
+
+  )
+}
+
+export default ProductDatails
+)
+i have eraue : Unhandled Runtime Error
+TypeError: Cannot read properties of undefined (reading 'map')
+
+Source
+app\Pages\ProductList.jsx (8:19) @ map
+
+   6 | return (
+   7 |   <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2'>
+>  8 |     {ProductList.map((lst, i) => (
+     |                 ^
+   9 |       <div key={i}><ProductItem product={lst} /></div>
+  10 |     ))}
+  11 |   </div>
+Show collapsed frames
