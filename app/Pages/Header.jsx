@@ -44,12 +44,7 @@ function Header() {
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 shadow-md">
           <div className="flex h-16 items-center justify-between">
             <div className="md:flex md:items-center md:gap-12">
-              <Image
-                src="https://w7.pngwing.com/pngs/92/275/png-transparent-computer-icons-computer-programming-web-development-content-management-system-coding-miscellaneous-angle-text.png"
-                alt="Logo"
-                width={70}
-                height={50}
-              />
+              <img src="https://w7.pngwing.com/pngs/92/275/png-transparent-computer-icons-computer-programming-web-development-content-management-system-coding-miscellaneous-angle-text.png" alt="Logo" width={70} height={50} />
             </div>
 
             <div className="hidden md:block">
